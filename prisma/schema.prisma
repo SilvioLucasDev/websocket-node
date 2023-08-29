@@ -6,3 +6,34 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model School {
+  id         Int      @id @unique
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  students Student[]
+}
+
+model Student {
+  id         Int      @id @unique
+  name       String
+  id_school  Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  school School  @relation(fields: [id_school], references: [id])
+  grades Grade[]
+}
+
+model Grade {
+  id         Int      @id @unique
+  note       Int
+  points     Int
+  id_student Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  student Student @relation(fields: [id_student], references: [id])
+}
