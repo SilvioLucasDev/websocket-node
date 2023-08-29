@@ -4,16 +4,18 @@ export class Note {
   constructor (
     readonly id: string,
     readonly idStudent: string,
-    readonly note: string
+    readonly note: number,
+    readonly points: number
   ) {}
 
   static create ({ idStudent, note }: Input, crypto: UUIDGenerator): Note {
     const id = crypto.uuid()
-    return new Note(id, idStudent, note)
+    const points = note * 10
+    return new Note(id, idStudent, note, points)
   }
 }
 
 type Input = {
   idStudent: string
-  note: string
+  note: number
 }
