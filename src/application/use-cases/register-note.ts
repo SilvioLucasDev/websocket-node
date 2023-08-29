@@ -1,12 +1,12 @@
 import { type UUIDGenerator } from '@/application/contracts/adapters'
-import { type GetStudent, type SaveNote } from '@/application/contracts/repositories'
+import { type GetPointsNote, type GetStudent, type SaveNote } from '@/application/contracts/repositories'
 import { Note } from '@/domain/entities'
 import { StudentNotFoundError } from '@/application/errors'
 
 export class RegisterNoteUseCase {
   constructor (
     private readonly studentRepository: GetStudent,
-    private readonly noteRepository: SaveNote,
+    private readonly noteRepository: SaveNote & GetPointsNote,
     private readonly crypto: UUIDGenerator
   ) {}
 
@@ -15,15 +15,16 @@ export class RegisterNoteUseCase {
     if (student === undefined) throw new StudentNotFoundError()
     const newNote = Note.create({ idStudent, note }, this.crypto)
     await this.noteRepository.save(newNote)
-
-    // APLICAR LOGICA PARA CHAMAR O REPO QUE CALCULA AS NOTAS PARA RETORNAR AQUI
-    return { }
+    const { points } = await this.noteRepository.getPoints({ id: idStudent })
+    return { points }
   }
 }
 
 type Input = {
-  note: string
+  note: number
   idStudent: string
 }
 
-type Output = any
+type Output = {
+  points: number
+}
