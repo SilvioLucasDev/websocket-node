@@ -8,7 +8,7 @@ datasource db {
 }
 
 model School {
-  id         Int      @id @unique
+  id         String      @id @unique
   name       String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -19,9 +19,9 @@ model School {
 }
 
 model Student {
-  id         Int      @id @unique
+  id         String      @id @unique
   name       String
-  id_school  Int
+  id_school  String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
@@ -32,10 +32,10 @@ model Student {
 }
 
 model Grade {
-  id         Int      @id @unique
+  id         String      @id @unique
   note       Int
   points     Int
-  id_student Int
+  id_student String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
