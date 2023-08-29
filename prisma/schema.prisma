@@ -33,7 +33,7 @@ model Student {
 
 model Grade {
   id         String      @id @unique
-  note       Int
+  note       Float
   points     Int
   id_student String
   created_at DateTime @default(now())
