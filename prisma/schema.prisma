@@ -14,6 +14,8 @@ model School {
   updated_at DateTime @updatedAt
 
   students Student[]
+
+  @@map("schools")
 }
 
 model Student {
@@ -25,6 +27,8 @@ model Student {
 
   school School  @relation(fields: [id_school], references: [id])
   grades Grade[]
+
+  @@map("students")
 }
 
 model Grade {
@@ -36,4 +40,6 @@ model Grade {
   updated_at DateTime @updatedAt
 
   student Student @relation(fields: [id_student], references: [id])
+
+  @@map("grades")
 }
