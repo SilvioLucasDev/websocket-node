@@ -16,7 +16,7 @@ export class RegisterGradeUseCase {
     const newGrade = Grade.create({ idStudent, note }, this.crypto)
     await this.gradeRepository.save(newGrade)
     const { points } = await this.gradeRepository.getPoints({ id: idStudent })
-    return { points }
+    return { points } // REMOVER ESSE RETORNO E DEIXAR VOID
   }
 }
 

@@ -14,7 +14,7 @@ export class PgGradeRepository implements SaveGrade, GetPointsGrade {
         points: true
       },
       where: {
-        id
+        id_student: id
       }
     })
     if (points._sum.points !== null && points._sum.points !== undefined) {

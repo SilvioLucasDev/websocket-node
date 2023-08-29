@@ -1,1 +1,1 @@
-export * from './expres'
+export * from './express'
