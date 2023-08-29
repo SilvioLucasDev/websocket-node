@@ -1,1 +1,1 @@
-export * from './register-note'
+export * from './register-grade'

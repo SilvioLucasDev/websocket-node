@@ -1,6 +1,6 @@
 import { type UUIDGenerator } from '@/application/contracts/adapters'
 
-export class Note {
+export class Grade {
   constructor (
     readonly id: string,
     readonly idStudent: string,
@@ -8,10 +8,10 @@ export class Note {
     readonly points: number
   ) {}
 
-  static create ({ idStudent, note }: Input, crypto: UUIDGenerator): Note {
+  static create ({ idStudent, note }: Input, crypto: UUIDGenerator): Grade {
     const id = crypto.uuid()
     const points = note * 10
-    return new Note(id, idStudent, note, points)
+    return new Grade(id, idStudent, note, points)
   }
 }
 
