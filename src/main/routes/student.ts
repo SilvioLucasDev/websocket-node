@@ -1,4 +1,5 @@
 import { type On } from '@/application/contracts/adapters'
+import { makeRegisterGradeController } from '@/main/factories/presentation/controllers'
 
 export class StudentRouter {
   constructor (httpServer: On) {
@@ -6,7 +7,7 @@ export class StudentRouter {
       method: 'post',
       url: '/students/grades',
       callback: async (params: any, body: any) => {
-        return { statusCode: 200, data: { Hello: 'World' } }
+        return await makeRegisterGradeController().handle(body)
       }
     })
   }
