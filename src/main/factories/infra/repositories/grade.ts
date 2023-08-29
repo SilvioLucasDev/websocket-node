@@ -1,5 +1,5 @@
 import { PgGradeRepository } from '@/infra/repositories/postgres'
 
-export const makePgEventRepository = (): PgGradeRepository => {
+export const makePgGradeRepository = (): PgGradeRepository => {
   return new PgGradeRepository()
 }
