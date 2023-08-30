@@ -8,7 +8,8 @@ export class GetRankingUseCase {
   ) {}
 
   async execute (): Promise<void> {
-    await this.gradeRepository.getRanking()
+    const rank = await this.gradeRepository.getRanking()
+    console.log(rank)
     // this.socketio.emit({
     //   event: 'podium',
     //   data: {

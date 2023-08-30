@@ -14,6 +14,7 @@ export interface GetRankingGrade {
 
 export namespace GetRankingGrade {
   export type Output = {
-    data: any[]
+    rankStudentsBySchool: Record<string, object[]>
+    rankStudents: object[]
   }
 }
