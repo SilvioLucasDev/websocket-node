@@ -4,9 +4,10 @@ import { env } from '@/main/config/env'
 import express from 'express'
 import http from 'http'
 import path from 'path'
-import { Server, type Socket } from 'socket.io'
+import { Server } from 'socket.io'
 
 export class SocketIOAdapter implements EmitTCP, ListenTCP {
+  private static instance: SocketIOAdapter
   io: any
   server: any
 
@@ -17,8 +18,13 @@ export class SocketIOAdapter implements EmitTCP, ListenTCP {
     this.io = new Server(this.server)
   }
 
+  static getInstance (): SocketIOAdapter {
+    if (SocketIOAdapter.instance == null) SocketIOAdapter.instance = new SocketIOAdapter()
+    return SocketIOAdapter.instance
+  }
+
   emit ({ event, data }: EmitTCP.Input): void {
-    this.io.on('connection', (socket: Socket) => {
+    this.io.on('connection', () => {
       this.io.emit(event, data)
     })
   }
