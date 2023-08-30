@@ -12,3 +12,14 @@ export namespace GetStudent {
     name: string
   } | undefined
 }
+
+export interface GetRankingStudent {
+  getRanking: () => Promise<GetRankingStudent.Output>
+}
+
+export namespace GetRankingStudent {
+  export type Output = {
+    rankStudentsBySchool: Record<string, object[]>
+    rankStudents: object[]
+  }
+}

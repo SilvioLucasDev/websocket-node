@@ -7,14 +7,3 @@ export interface SaveGrade {
 export namespace SaveGrade {
   export type Input = Grade
 }
-
-export interface GetRankingGrade {
-  getRanking: () => Promise<GetRankingGrade.Output>
-}
-
-export namespace GetRankingGrade {
-  export type Output = {
-    rankStudentsBySchool: Record<string, object[]>
-    rankStudents: object[]
-  }
-}
