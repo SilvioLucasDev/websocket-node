@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking Escolar</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./assets/style.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4 text-center">Ranking Escolar</h1>
+
+    <div class="row mt-4 ranking-container">
+      <!-- Pódio Geral -->
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center">Pódio Geral</h2>
+            <ul class="podium-list" id="podium"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões das Escolas -->
+      <div class="col-md-12 mt-4">
+        <div class="card">
+          <div class="card-body text-center">
+            <!-- <h2 class="card-title">Escolas</h2> -->
+            <button class="btn btn-dark school-button" id="dados-button">Escola Dados</button>
+            <button class="btn btn-dark school-button" id="tecnologia-button">Escola Tecnologia</button>
+            <button class="btn btn-dark school-button" id="produto-button">Escola Produto</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top 10 da Escola -->
+      <div class="col-md-12 mt-4">
+        <div class="card" style="display: none;" id="top-10">
+          <div class="card-body">
+            <h2 class="card-title text-center">Top 10 da Escola</h2>
+            <ol id="school-ranking"></ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+  <script src="./assets/script.js"></script>
+  <script src="./assets/websocket.js"></script>
+
+</body>
+</html>

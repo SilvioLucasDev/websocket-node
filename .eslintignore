@@ -3,3 +3,5 @@ dist
 coverage
 *.config.js
 seed.ts
+*.js
+*.spec.ts
