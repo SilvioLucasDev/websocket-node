@@ -1,4 +1,4 @@
-import { badRequest, serverError, type HttpResponse, ok } from '@/presentation/helpers'
+import { badRequest, serverError, type HttpResponse, noContent } from '@/presentation/helpers'
 import { type RegisterGradeUseCase } from '@/application/use-cases'
 import { StudentNotFoundError } from '@/application/errors'
 import { RequiredString, RequiredNumber, ValidationComposite } from '@/presentation/validation'
@@ -11,8 +11,8 @@ export class RegisterGradeController implements Controller {
     try {
       const error = this.validate(httpRequest)
       if (error !== undefined) return badRequest(error)
-      const result = await this.registerGradeUseCase.execute({ note: httpRequest.note, idStudent: httpRequest.idStudent })
-      return ok({ points: result.points })
+      await this.registerGradeUseCase.execute({ note: httpRequest.note, idStudent: httpRequest.idStudent })
+      return noContent()
     } catch (error) {
       if (error instanceof StudentNotFoundError) return badRequest(error)
       return serverError(error as Error)
@@ -31,6 +31,4 @@ type HttpRequest = {
   idStudent: string
 }
 
-type Model = Error | {
-  points: number
-}
+type Model = Error
