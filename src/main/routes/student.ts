@@ -1,8 +1,8 @@
-import { type On } from '@/application/contracts/adapters'
+import { type OnHTTP } from '@/application/contracts/adapters'
 import { makeRegisterGradeController } from '@/main/factories/presentation/controllers'
 
 export class StudentRouter {
-  constructor (httpServer: On) {
+  constructor (httpServer: OnHTTP) {
     httpServer.on({
       method: 'post',
       url: '/students/grades',

@@ -1,8 +1,8 @@
-export interface On {
-  on: (input: On.Input) => void
+export interface OnHTTP {
+  on: (input: OnHTTP.Input) => void
 }
 
-export namespace On {
+export namespace OnHTTP {
   export type Input = {
     method: string
     url: string
@@ -10,6 +10,6 @@ export namespace On {
   }
 }
 
-export interface Listen {
+export interface ListenHTTP {
   listen: () => void
 }
