@@ -8,16 +8,12 @@ export namespace SaveGrade {
   export type Input = Grade
 }
 
-export interface GetPointsGrade {
-  getPoints: (id: GetPointsGrade.Input) => Promise<GetPointsGrade.Output>
+export interface GetRankingGrade {
+  getRanking: () => Promise<GetRankingGrade.Output>
 }
 
-export namespace GetPointsGrade {
-  export type Input = {
-    id: string
-  }
-
+export namespace GetRankingGrade {
   export type Output = {
-    points: number
+    data: any[]
   }
 }
