@@ -1,25 +1,83 @@
-import { type GetPointsGrade, type SaveGrade } from '@/application/contracts/repositories'
+import { type SaveGrade } from '@/application/contracts/repositories'
 import prisma from '@/infra/repositories/postgres/helpers/connection'
 
-export class PgGradeRepository implements SaveGrade, GetPointsGrade {
+export class PgGradeRepository implements SaveGrade {
   async save ({ id, idStudent, note, points }: SaveGrade.Input): Promise<void> {
     await prisma.grade.create({
       data: { id, id_student: idStudent, note, points }
     })
   }
 
-  async getPoints ({ id }: GetPointsGrade.Input): Promise<GetPointsGrade.Output> {
-    const points = await prisma.grade.aggregate({
+  async getRanking (): Promise<any> {
+    const schoolIds = await prisma.school.findMany({
+      select: {
+        id: true,
+        name: true
+      }
+    })
+
+    console.log('schoolIds', schoolIds)
+
+    const studentsWithPoints = await prisma.grade.groupBy({
+      by: ['id_student'],
       _sum: {
         points: true
       },
-      where: {
-        id_student: id
+      orderBy: {
+        _sum: {
+          points: 'desc'
+        }
       }
     })
-    if (points._sum.points !== null && points._sum.points !== undefined) {
-      return { points: points._sum.points }
+
+    console.log('studentsWithPoints', studentsWithPoints)
+
+    const studentPointsMap: any = {}
+
+    for (const student of studentsWithPoints) {
+      studentPointsMap[student.id_student] = student._sum.points
     }
-    return { points: 0 }
+
+    const sortedStudentsBySchool: any = {}
+
+    for (const school of schoolIds) {
+      const topStudents = await prisma.student.findMany({
+        where: {
+          id_school: school.id
+        },
+        take: 10,
+        orderBy: {
+          id: 'asc'
+        }
+      })
+
+      const topStudentsWithPoints = topStudents.map(student => ({
+        ...student,
+        points: studentPointsMap[student.id]
+      }))
+
+      const sortedTopStudents = topStudentsWithPoints.sort(
+        (a, b) => b.points - a.points
+      )
+
+      sortedStudentsBySchool[school.name] = sortedTopStudents
+    }
+
+    console.log('sortedStudentsBySchool', sortedStudentsBySchool)
+
+    const allStudents = await prisma.student.findMany()
+
+    const studentsWithTotalPoints = allStudents.map(student => ({
+      ...student,
+      points: studentPointsMap[student.id]
+    }))
+
+    const sortedStudentsByPoints = studentsWithTotalPoints.sort(
+      (a, b) => b.points - a.points
+    )
+
+    const topOverallStudents = sortedStudentsByPoints.slice(0, 3)
+
+    console.log('Top 3 Alunos Gerais:', topOverallStudents)
   }
 }
