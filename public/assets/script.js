@@ -1,40 +1,74 @@
-// Simulação de dados para o exemplo
-const dadosRanking = ['Aluno A', 'Aluno B', 'Aluno C'];
-const tecnologiaRanking = ['Aluno D', 'Aluno E', 'Aluno F'];
-const produtoRanking = ['Aluno G', 'Aluno H', 'Aluno I'];
-const podium = ['Aluno A', 'Aluno no Meio', 'Aluno I'];
+const socket = io('http://localhost:3000');
 
-// Mapeamento de botões para dados de escola
-const schoolData = {
-  'dados-button': dadosRanking,
-  'tecnologia-button': tecnologiaRanking,
-  'produto-button': produtoRanking
-};
+socket.on('podium', (data) => {
+  updatePodium(data.rankStudents);
+  updateSchoolRanking(data.rankStudentsBySchool);
+});
 
-// Função para atualizar os rankings na tela
-function updateRankings(ranking) {
-  updateSchoolRanking('podium', ranking);
+function updatePodium(rankStudents) {
+  podium = rankStudents.map(student => student.name)
+  setRanking('podium', podium);
 }
 
-// Função auxiliar para atualizar um ranking
-function updateSchoolRanking(elementId, ranking) {
+let schoolData = {}
+function updateSchoolRanking(rankStudentsBySchool) {
+  const schoolsRankings = {};
+  for (const school in rankStudentsBySchool) {
+    schoolsRankings[school] = rankStudentsBySchool[school].map(student => student.name);
+  }
+  schoolData = {
+    'data-button': schoolsRankings['Dados'],
+    'tech-button': schoolsRankings['Tecnologia'],
+    'product-button': schoolsRankings['Produto']
+  };
+  const activeButton = document.querySelector('.school-button.active');
+  if (activeButton) {
+    const buttonId = activeButton.id;
+    const ranking = schoolData[buttonId];
+    if (ranking) {
+      showSchoolRanking(buttonId, ranking);
+    }
+  }
+}
+
+function setRanking(elementId, ranking) {
   const element = document.getElementById(elementId);
   element.innerHTML = ranking.map((student) => `<li>${student}</li>`).join('');
 }
 
-// Função para exibir o ranking da escola ao clicar no botão
 function showSchoolRanking(buttonId) {
   const ranking = schoolData[buttonId];
   if (ranking) {
-    updateSchoolRanking('school-ranking', ranking);
+    setRanking('school-ranking', ranking);
+    switch (buttonId) {
+      case 'data-button':
+        schoolName = 'Dados'
+        break;
+      case 'tech-button':
+        schoolName = 'Tecnologia'
+        break;
+      case 'product-button':
+        schoolName = 'Produtos'
+        break;
+      default:
+        schoolName = 'Escolas'
+    }
+    document.getElementById('school-name').innerText = schoolName;
     document.getElementById('top-10').style.display = 'block';
   }
 }
 
-// Configurar os eventos de clique para os botões
-document.getElementById('dados-button').addEventListener('click', () => showSchoolRanking('dados-button'));
-document.getElementById('tecnologia-button').addEventListener('click', () => showSchoolRanking('tecnologia-button'));
-document.getElementById('produto-button').addEventListener('click', () => showSchoolRanking('produto-button'));
+document.querySelectorAll('.school-button').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.school-button').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    const buttonId = button.id;
+    const ranking = schoolData[buttonId];
+    if (ranking) showSchoolRanking(buttonId, ranking);
+  });
+});
 
-// Chamada inicial para exibir o pódio geral
-updateRankings(podium);
+document.getElementById('data-button').addEventListener('click', () => showSchoolRanking('data-button'));
+document.getElementById('tech-button').addEventListener('click', () => showSchoolRanking('tech-button'));
+document.getElementById('product-button').addEventListener('click', () => showSchoolRanking('product-button'));
+

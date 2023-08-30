@@ -24,9 +24,7 @@ export class SocketIOAdapter implements EmitTCP, ListenTCP {
   }
 
   emit ({ event, data }: EmitTCP.Input): void {
-    this.io.on('connection', () => {
-      this.io.emit(event, data)
-    })
+    this.io.emit(event, data)
   }
 
   listen (): void {
