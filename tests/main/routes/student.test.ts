@@ -59,4 +59,25 @@ describe('StudentRouter', () => {
       expect(body.error).toBe(new StudentNotFoundError().message)
     })
   })
+
+  describe('GET /students/rankings', () => {
+    it('should return 204 if success', async () => {
+      prismaMock.school.findMany.mockResolvedValue([
+        { id: 'any_school_id_1', name: 'any_name_1', created_at: createdAt, updated_at: updatedAt, students: [] },
+        { id: 'any_school_id_2', name: 'any_name_2', created_at: createdAt, updated_at: updatedAt, students: [] },
+        { id: 'any_school_id_3', name: 'any_name_3', created_at: createdAt, updated_at: updatedAt, students: [] }
+      ] as unknown as School[])
+      prismaMock.student.findMany.mockResolvedValue([
+        { id: 'any_student_id_1', name: 'any_name_1', school_id: 'any_school_id_1', points: 1 },
+        { id: 'any_student_id_2', name: 'any_name_2', school_id: 'any_school_id_2', points: 2 },
+        { id: 'any_student_id_3', name: 'any_name_3', school_id: 'any_school_id_3', points: 3 }
+      ] as unknown as Student[])
+
+      const { status } = await request(httpServer.app)
+        .get('/v1/api/students/rankings')
+        .send()
+
+      expect(status).toBe(204)
+    })
+  })
 })
