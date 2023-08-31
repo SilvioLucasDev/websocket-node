@@ -14,7 +14,7 @@ export class RegisterGradeController implements Controller {
     try {
       const error = this.validate(httpRequest)
       if (error !== undefined) return badRequest(error)
-      await this.registerGradeUseCase.execute({ note: httpRequest.note, idStudent: httpRequest.idStudent })
+      await this.registerGradeUseCase.execute({ note: httpRequest.note, studentId: httpRequest.studentId })
       await this.getRankingUseCase.execute()
       return noContent()
     } catch (error) {
@@ -23,16 +23,16 @@ export class RegisterGradeController implements Controller {
     }
   }
 
-  private validate ({ note, idStudent }: HttpRequest): Error | undefined {
+  private validate ({ note, studentId }: HttpRequest): Error | undefined {
     return new ValidationComposite([
       new RequiredNumber(note, 'note'),
-      new RequiredString(idStudent, 'idStudent')
+      new RequiredString(studentId, 'studentId')
     ]).validate()
   }
 }
 type HttpRequest = {
   note: number
-  idStudent: string
+  studentId: string
 }
 
 type Model = Error

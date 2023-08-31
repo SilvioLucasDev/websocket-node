@@ -6,7 +6,7 @@ import { type MockProxy, mock } from 'jest-mock-extended'
 
 describe('GetRankingUseCase', () => {
   let note: number
-  let idStudent: string
+  let studentId: string
   let name: string
   let rankStudentsBySchool: Record<string, object[]>
   let rankStudents: object[]
@@ -18,7 +18,7 @@ describe('GetRankingUseCase', () => {
 
   beforeAll(() => {
     note = 7.6
-    idStudent = 'any_student_id'
+    studentId = 'any_student_id'
     name = 'any_name'
     rankStudentsBySchool = {
       'school_1': [{ data: 'any_data_1' }],

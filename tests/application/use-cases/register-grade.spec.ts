@@ -8,7 +8,7 @@ import { type MockProxy, mock } from 'jest-mock-extended'
 
 describe('RegisterGradeUseCase', () => {
   let note: number
-  let idStudent: string
+  let studentId: string
   let name: string
 
   let sut: RegisterGradeUseCase
@@ -20,11 +20,11 @@ describe('RegisterGradeUseCase', () => {
 
   beforeAll(() => {
     note = 7.6
-    idStudent = 'any_student_id'
+    studentId = 'any_student_id'
     name = 'any_name'
 
     studentRepository = mock()
-    studentRepository.get.mockResolvedValue({ id: idStudent, name })
+    studentRepository.get.mockResolvedValue({ id: studentId, name })
     gradeRepository = mock()
     crypto = mock()
     grade = jest.spyOn(Grade, 'create')
@@ -35,29 +35,29 @@ describe('RegisterGradeUseCase', () => {
   })
 
   it('should call method get of StudentRepository with correct value', async () => {
-    await sut.execute({ note, idStudent })
+    await sut.execute({ note, studentId })
 
-    expect(studentRepository.get).toHaveBeenCalledWith({ id: idStudent })
+    expect(studentRepository.get).toHaveBeenCalledWith({ id: studentId })
     expect(studentRepository.get).toHaveBeenCalledTimes(1)
   })
 
   it('should throw StudentNotFoundError if StudentRepository return undefined', async () => {
     studentRepository.get.mockResolvedValueOnce(undefined)
 
-    const promise = sut.execute({ note, idStudent })
+    const promise = sut.execute({ note, studentId })
 
     await expect(promise).rejects.toThrow(new StudentNotFoundError())
   })
 
   it('should call GradeEntity with correct values', async () => {
-    await await sut.execute({ note, idStudent })
+    await await sut.execute({ note, studentId })
 
-    expect(grade).toHaveBeenCalledWith({ idStudent, note }, crypto)
+    expect(grade).toHaveBeenCalledWith({ note, studentId }, crypto)
     expect(grade).toHaveBeenCalledTimes(1)
   })
 
   it('should call GradeRepository with instance of GradeEntity', async () => {
-    await await sut.execute({ note, idStudent })
+    await await sut.execute({ note, studentId })
 
     expect(gradeRepository.save).toHaveBeenCalledWith(expect.any(Grade))
     expect(gradeRepository.save).toHaveBeenCalledTimes(1)
