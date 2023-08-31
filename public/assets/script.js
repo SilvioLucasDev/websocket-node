@@ -1,3 +1,11 @@
+window.onload = () => {
+  getRanking();
+}
+
+async function getRanking() {
+  await fetch('http://localhost:8080/v1/api/students/rankings', { method: 'GET' });
+}
+
 const socket = io('http://localhost:3000');
 
 socket.on('podium', (data) => {
