@@ -2,11 +2,14 @@ import { ExpressAdapter } from '@/presentation/adapters'
 import { env } from '@/main/config/env'
 
 import request from 'supertest'
+import express from 'express'
 
 describe('ExpressRouterAdapter', () => {
-  let sut: ExpressAdapter
   let method: string
   let url: string
+
+  let sut: ExpressAdapter
+  let app: any
 
   beforeAll(() => {
     method = 'post'
@@ -14,7 +17,8 @@ describe('ExpressRouterAdapter', () => {
   })
 
   beforeEach(() => {
-    sut = new ExpressAdapter()
+    app = express()
+    sut = new ExpressAdapter(app)
   })
 
   it('should return with statusCode 200 and valid data', async () => {

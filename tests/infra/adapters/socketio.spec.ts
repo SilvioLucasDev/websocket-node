@@ -1,17 +1,23 @@
 import { env } from "@/main/config/env";
 import { SocketIOAdapter } from "@/infra/adapters";
 
+import express from 'express'
+
 describe('SocketIOAdapter', () => {
   let event: string
   let data: object
 
   let sut: SocketIOAdapter;
+  let app: any
 
-  beforeEach(() => {
+  beforeAll(()=>{
     event = 'any_event'
     data = { key: 'value' };
+  })
 
-    sut = SocketIOAdapter.getInstance();
+  beforeEach(() => {
+    app = express()
+    sut = SocketIOAdapter.getInstance(app);
   });
 
   it('should call method emit of SocketIo with correct values', () => {
