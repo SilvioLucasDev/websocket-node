@@ -71,4 +71,3 @@ document.querySelectorAll('.school-button').forEach(button => {
 document.getElementById('data-button').addEventListener('click', () => showSchoolRanking('data-button'));
 document.getElementById('tech-button').addEventListener('click', () => showSchoolRanking('tech-button'));
 document.getElementById('product-button').addEventListener('click', () => showSchoolRanking('product-button'));
-
