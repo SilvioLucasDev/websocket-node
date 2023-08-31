@@ -20,14 +20,20 @@ Durante o desenvolvimento, enfrentei alguns desafios:
 ## Executando a Aplicação
 
 **1 - Banco de dados:** Certifique-se de ter o PostgreSQL instalado em sua máquina.
-<br> **3 - NodeJs:** Certifique-se de ter o NodeJs instalado em sua máquina.
+<br> **2 - NodeJs:** Certifique-se de ter o NodeJs instalado em sua máquina.
 <br> **3 - Env:** Renomeie o arquivo .env.example para .env e configure-o de acordo.
-<br> **4 - Instalação de Dependências:**  Execute `npm install` para instalar todas as dependências necessárias.
+<br> **4 - Instalação de Dependências:** Execute `npm install` para instalar todas as dependências necessárias.
 <br> **5 - Migrations e Seed:** Execute `npx prisma migrate dev` para rodar as migrations e a seed do banco de dados.
 <br> **6 - Executando o Servidor:** Execute `npm run dev` para iniciar o servidor na porta `http://localhost:8080` e todos os serviços da aplicação.
 <br> **7 - Testes:** Para rodar os testes unitários, execute `npm run test:unit`. Para os testes de integração e E2E, execute `npm run test:integration`.
-<br> **8 - Interface:** Acesse a página de ranking em  `http://localhost:3000/index.html`.
+<br> **8 - Interface:** Acesse a página de ranking em `http://localhost:3000/index.html`.
 <br> **9 - Prisma Studio:** Execute `npx prisma studio` para ter acesso ao banco de dados na web.
+
+### Inclui Docker e melhorei a utilização da instância do Express na branch feat/add-new-features (Após o prazo estipulado)
+**1 - Env:** Renomeie o arquivo .env.example para .env.
+<br> **2 - Utilização do Docker:** Faça um checkout para a branch feat/add-new-features `git checkout feat/add-new-features` e execute o comando `docker compose up`.
+<br> **3 - Interface:** Acesse a página de ranking em `http://localhost:3000/index.html`.
+<br> **4 - Swagger:** Acesse a a documentação em `http://localhost:8080/api-docs/`.
 
 ## Rotas
 
