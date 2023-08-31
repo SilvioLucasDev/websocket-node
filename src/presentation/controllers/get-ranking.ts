@@ -1,6 +1,5 @@
 import { serverError, type HttpResponse, noContent } from '@/presentation/helpers'
 import { type GetRankingUseCase } from '@/application/use-cases'
-
 import { type Controller } from '@/presentation/controllers'
 
 export class GetRankingController implements Controller {
