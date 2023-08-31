@@ -1,7 +1,7 @@
 export const studentPath = {
   post: {
     tags: ['Student'],
-    summary: 'API para cadastrar notas de alunos',
+    summary: 'Rota para cadastrar notas de alunos',
     requestBody: {
       content: {
         'application/json': {

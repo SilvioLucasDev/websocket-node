@@ -1,20 +1,7 @@
 {
-  "name": "microservice-node",
+  "name": "teste-fullstack",
   "version": "1.0.0",
-  "description": "Microservice in node using messaging services with clean architecture and TDD",
-  "keywords": [
-    "clean architecture",
-    "clean code",
-    "tdd",
-    "ddd",
-    "solid",
-    "design patterns",
-    "node",
-    "typescript",
-    "jest",
-    "rabbitmq",
-    "kafka"
-  ],
+  "description": "Api in node using websocket with clean architecture and tests",
   "author": {
     "name": "Silvio Lucas - SLDS",
     "email": "silviolucas_santos@hotmail.com"
@@ -27,7 +14,7 @@
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install",
     "test": "jest --passWithNoTests --no-cache --runInBand",
-    "test:watch": "npm test -- --watch",
+    "test:unit": "npm test -- --watch",
     "test:staged": "npm test -- --findRelatedTests",
     "test:coverage": "npm test -- --coverage",
     "test:integration": "npm test -- --detectOpenHandles --watch -c jest.integration.config.js"
