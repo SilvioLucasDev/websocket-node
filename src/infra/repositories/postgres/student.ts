@@ -29,7 +29,7 @@ export class PgStudentRepository implements GetStudent {
           select: {
             id: true,
             name: true,
-            id_school: true,
+            school_id: true,
             points: true
           }
         }
@@ -45,7 +45,7 @@ export class PgStudentRepository implements GetStudent {
       select: {
         id: true,
         name: true,
-        id_school: true,
+        school_id: true,
         points: true
       }
     })

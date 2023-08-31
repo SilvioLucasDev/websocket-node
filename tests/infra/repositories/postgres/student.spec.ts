@@ -48,9 +48,9 @@ describe('PgStudentRepository', () => {
     ] as unknown as School[])
 
     prismaMock.student.findMany.mockResolvedValue([
-      { id: 'any_student_id_1', name: 'any_name_1', id_school: 'any_school_id_1', points: 1 },
-      { id: 'any_student_id_2', name: 'any_name_2', id_school: 'any_school_id_2', points: 2 },
-      { id: 'any_student_id_3', name: 'any_name_3', id_school: 'any_school_id_3', points: 3 }
+      { id: 'any_student_id_1', name: 'any_name_1', school_id: 'any_school_id_1', points: 1 },
+      { id: 'any_student_id_2', name: 'any_name_2', school_id: 'any_school_id_2', points: 2 },
+      { id: 'any_student_id_3', name: 'any_name_3', school_id: 'any_school_id_3', points: 3 }
     ] as unknown as Student[])
 
     const result = await sut.getRanking()
@@ -62,9 +62,9 @@ describe('PgStudentRepository', () => {
         'any_name_3': [],
       },
       rankStudents: [
-        { id: 'any_student_id_1', name: 'any_name_1', id_school: 'any_school_id_1', points: 1 },
-        { id: 'any_student_id_2', name: 'any_name_2', id_school: 'any_school_id_2', points: 2 },
-        { id: 'any_student_id_3', name: 'any_name_3', id_school: 'any_school_id_3', points: 3 }
+        { id: 'any_student_id_1', name: 'any_name_1', school_id: 'any_school_id_1', points: 1 },
+        { id: 'any_student_id_2', name: 'any_name_2', school_id: 'any_school_id_2', points: 2 },
+        { id: 'any_student_id_3', name: 'any_name_3', school_id: 'any_school_id_3', points: 3 }
       ]
     });
   })

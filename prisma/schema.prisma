@@ -21,12 +21,12 @@ model School {
 model Student {
   id         String   @id @unique
   name       String
-  id_school  String
+  school_id  String
   points     Int
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  school School  @relation(fields: [id_school], references: [id])
+  school School  @relation(fields: [school_id], references: [id])
   grades Grade[]
 
   @@map("students")
@@ -36,11 +36,11 @@ model Grade {
   id         String   @id @unique
   note       Float
   points     Int
-  id_student String
+  student_id String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  student Student @relation(fields: [id_student], references: [id])
+  student Student @relation(fields: [student_id], references: [id])
 
   @@map("grades")
 }

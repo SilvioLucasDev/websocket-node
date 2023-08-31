@@ -40,8 +40,8 @@ describe('PgGradeRepository', () => {
   })
 
   it('should return undefined an create new grade', async () => {
-    prismaMock.grade.create.mockResolvedValue({ id, note, points, id_student: studentId, created_at: createdAt, updated_at: updatedAt })
-    prismaMock.student.update.mockResolvedValue({ id, name, id_school: schoolId, points, created_at: createdAt, updated_at: updatedAt })
+    prismaMock.grade.create.mockResolvedValue({ id, note, points, student_id: studentId, created_at: createdAt, updated_at: updatedAt })
+    prismaMock.student.update.mockResolvedValue({ id, name, school_id: schoolId, points, created_at: createdAt, updated_at: updatedAt })
     const grade = Grade.create({ note, studentId }, crypto)
 
     const result = sut.save(grade)
