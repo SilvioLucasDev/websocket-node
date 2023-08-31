@@ -29,7 +29,7 @@ export class SocketIOAdapter implements EmitTCP, ListenTCP {
 
   listen (): void {
     this.server.listen(env.webSocketPort, () => {
-      console.log(`WebSocket running at ${env.webSocketPort}`)
+      console.log(`WebSocket running at http://localhost:${env.webSocketPort}`)
     })
   }
 }
