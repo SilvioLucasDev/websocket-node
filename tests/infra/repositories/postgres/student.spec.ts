@@ -27,17 +27,17 @@ describe('PgStudentRepository', () => {
   it('should return student if exists', async () => {
     prismaMock.student.findFirst.mockResolvedValueOnce({ id, name } as unknown as Prisma.Prisma__StudentClient<Student>)
 
-    const event = await sut.get({ id })
+    const student = await sut.get({ id })
 
-    expect(event).toEqual({ id, name })
+    expect(student).toEqual({ id, name })
   })
 
   it('should return undefined if student not exists', async () => {
     prismaMock.student.findFirst.mockResolvedValueOnce(null)
 
-    const event = await sut.get({ id })
+    const student = await sut.get({ id })
 
-    expect(event).toBeUndefined()
+    expect(student).toBeUndefined()
   })
 
   it('should return an object with ranking arrays', async () => {

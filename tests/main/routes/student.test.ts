@@ -53,7 +53,7 @@ describe('StudentRouter', () => {
     it('should return 400 with StudentNotFoundError', async () => {
       const { status, body } = await request(httpServer.app)
         .post('/v1/api/students/grades')
-        .send({ note, studentId: 'invalid_event_id' })
+        .send({ note, studentId: 'invalid_student_id' })
 
       expect(status).toBe(400)
       expect(body.error).toBe(new StudentNotFoundError().message)

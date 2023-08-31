@@ -84,7 +84,7 @@ describe('RegisterGradeController', () => {
     })
   })
 
-  it('should return 400 if purchase fails and error is StudentNotFoundError', async () => {
+  it('should return 400 if process fails and error is StudentNotFoundError', async () => {
     registerGradeUseCase.execute.mockRejectedValueOnce(new StudentNotFoundError())
 
     const httpResponse = await sut.handle({ note, studentId })
@@ -95,7 +95,7 @@ describe('RegisterGradeController', () => {
     })
   })
 
-  it('should return 204 if purchase succeeds', async () => {
+  it('should return 204 if process succeeds', async () => {
     const httpResponse = await sut.handle({ note, studentId })
 
     expect(httpResponse).toEqual({
