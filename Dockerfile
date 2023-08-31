@@ -11,5 +11,6 @@ COPY . .
 EXPOSE 8080
 EXPOSE 8888
 EXPOSE 3000
+EXPOSE 5555
 
 CMD ["bash", "-c", "npx prisma migrate dev && npm run dev"]
