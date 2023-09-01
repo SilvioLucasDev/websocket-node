@@ -21,13 +21,11 @@ services:
     environment:
       - PORT=8080
       - WEB_SOCKET_PORT=3000
-      - SWAGGER_PORT=8888
       - DATABASE_URL=postgresql://postgres:root@postgres:5432/teste_fullstack?schema=public
     volumes:
       - ./:/usr/src/project
     ports:
       - "8080:8080"
-      - "8888:8888"
       - "3000:3000"
       - "5555:5555"
     depends_on:
