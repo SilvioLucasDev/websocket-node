@@ -13,8 +13,8 @@ export class RegisterGradeUseCase {
   async execute ({ note, studentId }: Input): Promise<void> {
     const student = await this.studentRepository.get({ id: studentId })
     if (student === undefined) throw new StudentNotFoundError()
-    const newGrade = Grade.create({ note, studentId }, this.crypto)
-    await this.gradeRepository.save(newGrade)
+    const grade = Grade.create({ note, studentId }, this.crypto)
+    await this.gradeRepository.save(grade)
   }
 }
 

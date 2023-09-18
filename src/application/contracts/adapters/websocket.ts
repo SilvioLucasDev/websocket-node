@@ -1,14 +1,14 @@
-export interface EmitTCP {
-  emit: (input: EmitTCP.Input) => void
+export interface EmitWebSocket {
+  emit: (input: EmitWebSocket.Input) => void
 }
 
-export namespace EmitTCP {
+export namespace EmitWebSocket {
   export type Input = {
     event: string
     data: object
   }
 }
 
-export interface ListenTCP {
+export interface ListenWebSocket {
   listen: () => void
 }

@@ -1,6 +1,6 @@
 import { GetRankingUseCase } from '@/application/use-cases'
 import { GetRankingStudent } from '@/application/contracts/repositories'
-import { EmitTCP } from '@/application/contracts/adapters'
+import { EmitWebSocket } from '@/application/contracts/adapters'
 
 import { type MockProxy, mock } from 'jest-mock-extended'
 
@@ -13,7 +13,7 @@ describe('GetRankingUseCase', () => {
 
   let sut: GetRankingUseCase
   let studentRepository: MockProxy<GetRankingStudent>
-  let websocket: MockProxy<EmitTCP>
+  let websocket: MockProxy<EmitWebSocket>
 
 
   beforeAll(() => {
@@ -28,7 +28,7 @@ describe('GetRankingUseCase', () => {
 
     studentRepository = mock()
     studentRepository.getRanking.mockResolvedValue({ rankStudentsBySchool, rankStudents });
-    websocket = mock<EmitTCP>();
+    websocket = mock<EmitWebSocket>();
     websocket.emit.mockImplementation(() => {});
   })
 

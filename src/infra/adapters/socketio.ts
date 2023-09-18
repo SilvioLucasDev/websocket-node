@@ -1,28 +1,30 @@
-import { type ListenTCP, type EmitTCP } from '@/application/contracts/adapters'
+import { type ListenWebSocket, type EmitWebSocket } from '@/application/contracts/adapters'
 import { env } from '@/main/config/env'
 
-import express from 'express'
+import express, { type Application } from 'express'
 import http from 'http'
 import path from 'path'
 import { Server } from 'socket.io'
 
-export class SocketIOAdapter implements EmitTCP, ListenTCP {
+export class SocketIOAdapter implements EmitWebSocket, ListenWebSocket {
   private static instance: SocketIOAdapter
-  io: any
-  server: any
+  io: Server
+  server: http.Server
 
-  constructor (app: any) {
+  constructor (app: Application) {
     app.use(express.static(path.join(__dirname, '../../../', 'public')))
     this.server = http.createServer(app)
     this.io = new Server(this.server)
   }
 
-  static getInstance (app: any): SocketIOAdapter {
-    if (SocketIOAdapter.instance == null) SocketIOAdapter.instance = new SocketIOAdapter(app)
+  static getInstance (app: Application): SocketIOAdapter {
+    if (SocketIOAdapter.instance == null) {
+      SocketIOAdapter.instance = new SocketIOAdapter(app)
+    }
     return SocketIOAdapter.instance
   }
 
-  emit ({ event, data }: EmitTCP.Input): void {
+  emit ({ event, data }: EmitWebSocket.Input): void {
     this.io.emit(event, data)
   }
 

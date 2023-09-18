@@ -1,10 +1,10 @@
-import { type EmitTCP } from '@/application/contracts/adapters'
+import { type EmitWebSocket } from '@/application/contracts/adapters'
 import { type GetRankingStudent } from '@/application/contracts/repositories'
 
 export class GetRankingUseCase {
   constructor (
     private readonly studentRepository: GetRankingStudent,
-    private readonly websocket: EmitTCP
+    private readonly websocket: EmitWebSocket
   ) { }
 
   async execute (): Promise<void> {

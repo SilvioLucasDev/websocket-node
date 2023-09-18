@@ -1,24 +1,42 @@
 import { ExpressAdapter } from '@/presentation/adapters'
-import { env } from '@/main/config/env'
 
 import request from 'supertest'
-import express from 'express'
+import express, { type Application } from 'express'
 
 describe('ExpressRouterAdapter', () => {
   let method: string
   let url: string
+  let port: string
 
   let sut: ExpressAdapter
-  let app: any
+  let app: Application
 
   beforeAll(() => {
     method = 'post'
-    url = '/students/grades'
+    url = '/any_url'
+    port = 'any_port'
   })
 
   beforeEach(() => {
     app = express()
-    sut = new ExpressAdapter(app)
+    sut = new ExpressAdapter(port, app)
+  })
+
+  it('should use json and cors middleware', async () => {
+    sut.on({
+      method: 'get',
+      url,
+      callback: async (params: any, body: any) => ({
+        statusCode: 200,
+        data: { data: 'any_data' }
+      })
+    })
+
+    const response = await request(app).get('/v1/api/any_url')
+
+    expect(response.status).toBe(200)
+    expect(response.header['content-type']).toContain('application/json')
+    expect(response.header['access-control-allow-origin']).toBe('*')
   })
 
   it('should return with statusCode 200 and valid data', async () => {
@@ -31,10 +49,26 @@ describe('ExpressRouterAdapter', () => {
       })
     })
 
-    const response = await request(sut.app).post('/v1/api/students/grades').send()
+    const response = await request(app).post('/v1/api/any_url').send()
 
     expect(response.status).toBe(200)
     expect(response.body).toEqual({ data: 'any_data' })
+  })
+
+  it('should return with statusCode 202 and empty data', async () => {
+    sut.on({
+      method,
+      url,
+      callback: async (params: any, body: any) => ({
+        statusCode: 202,
+        data: undefined
+      })
+    })
+
+    const response = await request(app).post('/v1/api/any_url').send()
+
+    expect(response.status).toBe(202)
+    expect(response.body).toEqual('')
   })
 
   it('should return with statusCode 204 and empty data', async () => {
@@ -47,7 +81,7 @@ describe('ExpressRouterAdapter', () => {
       })
     })
 
-    const response = await request(sut.app).post('/v1/api/students/grades').send()
+    const response = await request(app).post('/v1/api/any_url').send()
 
     expect(response.status).toBe(204)
     expect(response.body).toEqual({ })
@@ -63,7 +97,7 @@ describe('ExpressRouterAdapter', () => {
       })
     })
 
-    const response = await request(sut.app).post('/v1/api/students/grades').send()
+    const response = await request(app).post('/v1/api/any_url').send()
 
     expect(response.status).toBe(400)
     expect(response.body).toEqual({ error: 'any_error' })
@@ -79,17 +113,17 @@ describe('ExpressRouterAdapter', () => {
       })
     })
 
-    const response = await request(sut.app).post('/v1/api/students/grades').send()
+    const response = await request(app).post('/v1/api/any_url').send()
 
     expect(response.status).toBe(500)
     expect(response.body).toEqual({ error: 'any_error' })
   })
 
   it('should call method listen with port correct', () => {
-    sut.app.listen = jest.fn()
+    app.listen = jest.fn()
 
     sut.listen()
 
-    expect(sut.app.listen).toHaveBeenCalledWith(env.port, expect.any(Function))
+    expect(app.listen).toHaveBeenCalledWith(port, expect.any(Function))
   })
 })
