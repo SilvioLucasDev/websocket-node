@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  postgres:
+    container_name: postgres-container
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=root
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-container
+    restart: always
+    environment:
+      - PORT=8080
+      - WEB_SOCKET_PORT=3000
+      - DATABASE_URL=postgresql://postgres:root@postgres:5432/teste_fullstack?schema=public
+    volumes:
+      - ./:/usr/src/project
+    ports:
+      - "8080:8080"
+      - "3000:3000"
+      - "5555:5555"
+    depends_on:
+      - postgres

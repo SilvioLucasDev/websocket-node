@@ -1,7 +1,6 @@
 import { prismaMock } from '@/tests/infra/repositories/postgres/mocks'
-import { StudentRouter } from '@/main/routes'
 import { StudentNotFoundError } from '@/application/errors'
-import { ExpressAdapter } from '@/presentation/adapters'
+import { app } from '@/main'
 
 import request from 'supertest'
 import { type School, type Prisma, type Student } from '@prisma/client'
@@ -12,17 +11,11 @@ describe('StudentRouter', () => {
   let createdAt: Date
   let updatedAt: Date
 
-  let httpServer: ExpressAdapter
-
   beforeAll(() => {
     note = 7.6
     studentId = '1f879d78-46ae-11ee-be56-0242ac120002'
     createdAt = new Date()
     updatedAt = new Date()
-
-    httpServer = new ExpressAdapter()
-    new StudentRouter(httpServer)
-    httpServer.listen()
   })
 
   afterAll(async () => {
@@ -43,7 +36,7 @@ describe('StudentRouter', () => {
         { id: 'any_student_id_3', name: 'any_name_3', school_id: 'any_school_id_3', points: 3 }
       ] as unknown as Student[])
 
-      const { status } = await request(httpServer.app)
+      const { status } = await request(app)
         .post('/v1/api/students/grades')
         .send({ note, studentId })
 
@@ -51,7 +44,7 @@ describe('StudentRouter', () => {
     })
 
     it('should return 400 with StudentNotFoundError', async () => {
-      const { status, body } = await request(httpServer.app)
+      const { status, body } = await request(app)
         .post('/v1/api/students/grades')
         .send({ note, studentId: 'invalid_student_id' })
 
@@ -73,7 +66,7 @@ describe('StudentRouter', () => {
         { id: 'any_student_id_3', name: 'any_name_3', school_id: 'any_school_id_3', points: 3 }
       ] as unknown as Student[])
 
-      const { status } = await request(httpServer.app)
+      const { status } = await request(app)
         .get('/v1/api/students/rankings')
         .send()
 

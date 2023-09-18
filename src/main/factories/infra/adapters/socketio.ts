@@ -1,5 +1,5 @@
 import { SocketIOAdapter } from '@/infra/adapters'
 
-export const makeSocketIOAdapter = (): SocketIOAdapter => {
-  return SocketIOAdapter.getInstance()
+export const makeSocketIOAdapter = (app: any): SocketIOAdapter => {
+  return SocketIOAdapter.getInstance(app)
 }

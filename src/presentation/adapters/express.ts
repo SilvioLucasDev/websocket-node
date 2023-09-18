@@ -7,8 +7,8 @@ import cors from 'cors'
 export class ExpressAdapter implements OnHTTP, ListenHTTP {
   app: any
 
-  constructor () {
-    this.app = express()
+  constructor (app: any) {
+    this.app = app
     this.app.use(express.json())
     this.app.use(cors())
   }

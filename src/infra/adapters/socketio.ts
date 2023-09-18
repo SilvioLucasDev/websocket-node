@@ -11,15 +11,14 @@ export class SocketIOAdapter implements EmitTCP, ListenTCP {
   io: any
   server: any
 
-  constructor () {
-    const app = express()
+  constructor (app: any) {
     app.use(express.static(path.join(__dirname, '../../../', 'public')))
     this.server = http.createServer(app)
     this.io = new Server(this.server)
   }
 
-  static getInstance (): SocketIOAdapter {
-    if (SocketIOAdapter.instance == null) SocketIOAdapter.instance = new SocketIOAdapter()
+  static getInstance (app: any): SocketIOAdapter {
+    if (SocketIOAdapter.instance == null) SocketIOAdapter.instance = new SocketIOAdapter(app)
     return SocketIOAdapter.instance
   }
 

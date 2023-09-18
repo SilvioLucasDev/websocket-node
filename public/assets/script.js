@@ -14,7 +14,8 @@ socket.on('podium', (data) => {
 });
 
 function updatePodium(rankStudents) {
-  podium = rankStudents.map(student => student.name)
+  podium = rankStudents.map(student => `${student.name} - Pontos: ${student.points}`)
+  console.log(podium)
   setRanking('podium', podium);
 }
 
@@ -22,8 +23,9 @@ let schoolData = {}
 function updateSchoolRanking(rankStudentsBySchool) {
   const schoolsRankings = {};
   for (const school in rankStudentsBySchool) {
-    schoolsRankings[school] = rankStudentsBySchool[school].map(student => student.name);
+    schoolsRankings[school] = rankStudentsBySchool[school].map(student => `${student.name} - Pontos: ${student.points}`);
   }
+  console.log(schoolsRankings)
   schoolData = {
     'data-button': schoolsRankings['Dados'],
     'tech-button': schoolsRankings['Tecnologia'],
