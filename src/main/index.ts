@@ -6,5 +6,5 @@ import express from 'express'
 
 export const app = express()
 setupSwagger(app)
-initHttpServer(app)
+export const server = initHttpServer(app)
 initWebSocket(app).listen()

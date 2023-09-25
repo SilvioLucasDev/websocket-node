@@ -1,7 +1,10 @@
 import { prismaMock } from '@/tests/infra/repositories/postgres/mocks'
 import { StudentNotFoundError } from '@/application/errors'
-import { app } from '@/main'
+import { SocketIOAdapter } from '@/infra/adapters'
+import { app, server } from '@/main'
 
+import { type Application } from 'express'
+import { type Server } from 'http'
 import request from 'supertest'
 import { type School, type Prisma, type Student } from '@prisma/client'
 
@@ -11,15 +14,28 @@ describe('StudentRouter', () => {
   let createdAt: Date
   let updatedAt: Date
 
+  let newApp: Application
+  let newServer: Server
+
   beforeAll(() => {
     note = 7.6
     studentId = '1f879d78-46ae-11ee-be56-0242ac120002'
     createdAt = new Date()
     updatedAt = new Date()
+
+    newApp = app
+    newServer = server
   })
 
   afterAll(async () => {
     await prismaMock.$disconnect()
+  })
+
+  afterEach(() => {
+    const webSocketInstance = SocketIOAdapter.getInstance(app)
+    webSocketInstance.server.close()
+    webSocketInstance.io.close()
+    newServer.close()
   })
 
   describe('POST /students/grades', () => {
@@ -36,7 +52,7 @@ describe('StudentRouter', () => {
         { id: 'any_student_id_3', name: 'any_name_3', school_id: 'any_school_id_3', points: 3 }
       ] as unknown as Student[])
 
-      const { status } = await request(app)
+      const { status } = await request(newApp)
         .post('/v1/api/students/grades')
         .send({ note, studentId })
 
@@ -44,7 +60,7 @@ describe('StudentRouter', () => {
     })
 
     it('should return 400 with StudentNotFoundError', async () => {
-      const { status, body } = await request(app)
+      const { status, body } = await request(newApp)
         .post('/v1/api/students/grades')
         .send({ note, studentId: 'invalid_student_id' })
 
@@ -66,7 +82,7 @@ describe('StudentRouter', () => {
         { id: 'any_student_id_3', name: 'any_name_3', school_id: 'any_school_id_3', points: 3 }
       ] as unknown as Student[])
 
-      const { status } = await request(app)
+      const { status } = await request(newApp)
         .get('/v1/api/students/rankings')
         .send()
 
