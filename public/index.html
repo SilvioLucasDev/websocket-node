@@ -5,45 +5,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ranking Escolar</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./assets/style.css">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 
-<body>
-  <div class="container">
-    <h1 class="mt-4 text-center">Ranking Escolar</h1>
+<body class="page-leaderboard">
+  <div id="contain-all" class="slideout-panel">
+    <section class="ranking">
+      <div class="contain">
+        <div class="ranking-table">
+          <div class="ranking-table-header-row">
+            <div class="ranking-table-header-data h6">Rank</div>
+            <div class="ranking-table-header-data h6">Nome</div>
+            <div class="ranking-table-header-data h6">Pontos</div>
+          </div>
+          <div class="ranking-table-row-leader-1">
+            <div class="ranking-table-data-leader-1">
+              <div class="medal-gold"></div>
+            </div>
+            <div class="ranking-table-data">
+              <span id="rank-one-name">Silvio</span>
+            </div>
+            <div class="ranking-table-data">
+              <span id="rank-one-points">123</span>
+            </div>
+          </div>
+          <div class="ranking-table-row-leader-2">
+            <div class="ranking-table-data-leader-2">
+              <div class="medal-silver"></div>
+            </div>
+            <div class="ranking-table-data">
+              <span id="rank-two-name">Larissa</span>
+            </div>
+            <div class="ranking-table-data">
+              <span id="rank-two-points">123</span>
+            </div>
+          </div>
+          <div class="ranking-table-row-leader-3">
+            <div class="ranking-table-data-leader-3">
+              <div class="medal-bronze"></div>
+            </div>
+            <div class="ranking-table-data">
+              <span id="rank-three-name">João</span>
+            </div>
+            <div class="ranking-table-data">
+              <span id="rank-three-points">123</span>
+            </div>
+          </div>
 
-    <div class="row mt-4 ranking-container">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title text-center">Pódio Geral</h2>
-            <ol class="podium-list" id="podium"></ol>
+          <div class="ranking-button-schools">
+            <h2>Escolas</h2>
+
+            <div class="schools">
+              <button class="button" id="data-button">Dados</button>
+              <button class="button" id="tech-button">Tecnologia</button>
+              <button class="button" id="product-button">Produto</button>
+            </div>
+          </div>
+
+          <div class="ranking-table-schools">
+            <h2>Top 10 de <span id="school-name"></span></h2>
+
+            <div id="school-ranking" class="ranking-table-body">
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="col-md-12 mt-4">
-        <div class="card">
-          <div class="card-body text-center">
-            <h2 class="card-title">Escolas</h2>
-            <button class="btn btn-dark school-button" id="data-button">Dados</button>
-            <button class="btn btn-dark school-button" id="tech-button">Tecnologia</button>
-            <button class="btn btn-dark school-button" id="product-button">Produto</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-12 mt-4">
-        <div class="card" style="display: none;" id="top-10">
-          <div class="card-body text-center">
-            <h2 class="card-title text-center">Top 10 de <span id="school-name"></span></h2>
-            <ol id="school-ranking"></ol>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
