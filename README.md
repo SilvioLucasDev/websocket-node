@@ -1,5 +1,7 @@
 # api-node-websocket
 Este projeto Node.js utiliza um serviço de WebSocket e o PostgreSQL como banco de dados. O projeto foi desenvolvido desenvolvido seguindo a metodologia TDD (Test-Driven Development) e aplicando os princípios SOLID, Clean Architecture e Design Patterns para resolver desafios comuns de desenvolvimento.
+
+Para ter uma ideia mais concreta do projeto, você pode assistir a um vídeo demonstrando seu funcionamento [aqui](https://youtu.be/okQjqzkIo4o?si=ULZ8AOceKBfpEZox)
 <br><br>
 > ## Abordagem e Soluções
 
