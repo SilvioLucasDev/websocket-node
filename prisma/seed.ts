@@ -22,27 +22,27 @@ async function main() {
     data: [
       {
         id: '1f879d78-46ae-11ee-be56-0242ac120002',
-        name: 'Camila de Dados',
+        name: 'Gildo de Dados',
         points: 70,
         school_id: '52e52322-244f-4050-90f7-92e242419cb1'
       }, {
         id: '2f879d78-46ae-11ee-be56-0242ac120002',
-        name: 'Renato de Dados',
+        name: 'Lucas de Dados',
         points: 122,
         school_id: '52e52322-244f-4050-90f7-92e242419cb1'
       }, {
         id: '3f879d78-46ae-11ee-be56-0242ac120002',
-        name: 'Fabiano de Dados',
+        name: 'Silvio de Dados',
         points: 58,
         school_id: '52e52322-244f-4050-90f7-92e242419cb1'
       }, {
         id: '4f879d78-46ae-11ee-be56-0242ac120002',
-        name: 'Lais de Tecnologia',
+        name: 'Ligia de Tecnologia',
         points: 111,
         school_id: '028baac4-46ae-11ee-be56-0242ac120002'
       }, {
         id: '5f879d78-46ae-11ee-be56-0242ac120002',
-        name: 'Fernanda de Tecnologia',
+        name: 'Larissa de Tecnologia',
         points: 149,
         school_id: '028baac4-46ae-11ee-be56-0242ac120002'
       }, {
@@ -52,17 +52,17 @@ async function main() {
         school_id: '028baac4-46ae-11ee-be56-0242ac120002'
       }, {
         id: '7f879d78-46ae-11ee-be56-0242ac120002',
-        name: 'Joaquim de Produto',
+        name: 'Eduardo de Produto',
         points: 43,
         school_id: '09fb0336-46ae-11ee-be56-0242ac120002'
       }, {
         id: '8f879d78-46ae-11ee-be56-0242ac120002',
-        name: 'Pedro de Produto',
+        name: 'Fátima de Produto',
         points: 133,
         school_id: '09fb0336-46ae-11ee-be56-0242ac120002'
       }, {
         id: '9f879d78-46ae-11ee-be56-0242ac120002',
-        name: 'Pietra de Produto',
+        name: 'Vanessa de Produto',
         points: 88,
         school_id: '09fb0336-46ae-11ee-be56-0242ac120002'
       },{
@@ -77,32 +77,32 @@ async function main() {
         school_id: '52e52322-244f-4050-90f7-92e242419cb1'
       }, {
         id: '3f879d78-46ae-11ee-be56-0242ac120003',
-        name: 'Carlos de Dados',
+        name: 'David de Dados',
         points: 156,
         school_id: '52e52322-244f-4050-90f7-92e242419cb1'
       }, {
         id: '4f879d78-46ae-11ee-be56-0242ac120004',
-        name: 'Felipe de Tecnologia',
+        name: 'Romeu de Tecnologia',
         points: 186,
         school_id: '028baac4-46ae-11ee-be56-0242ac120002'
       }, {
         id: '5f879d78-46ae-11ee-be56-0242ac120005',
-        name: 'Julia de Tecnologia',
+        name: 'Euza de Tecnologia',
         points: 166,
         school_id: '028baac4-46ae-11ee-be56-0242ac120002'
       }, {
         id: '6f879d78-46ae-11ee-be56-0242ac120006',
-        name: 'Romeu de Tecnologia',
+        name: 'Susanne de Tecnologia',
         points: 156,
         school_id: '028baac4-46ae-11ee-be56-0242ac120002'
       }, {
         id: '7f879d78-46ae-11ee-be56-0242ac120007',
-        name: 'José de Produto',
+        name: 'Cíntia de Produto',
         points: 176,
         school_id: '09fb0336-46ae-11ee-be56-0242ac120002'
       }, {
         id: '8f879d78-46ae-11ee-be56-0242ac120008',
-        name: 'Marcia de Produto',
+        name: 'Daniels de Produto',
         points: 166,
         school_id: '09fb0336-46ae-11ee-be56-0242ac120002'
       }, {
